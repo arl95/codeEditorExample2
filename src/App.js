@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import ReactDOM from "react-dom";
+import CodeEditor, { SelectionText } from "@uiw/react-textarea-code-editor";
+
 
 function App() {
+  const textRef = React.useRef();
+  const [code, setCode] = React.useState(
+    `function add(a, b) {\n  return a + b;\n}`
+  );
+  useEffect(() => {
+    if (textRef.current) {
+      const obj = new SelectionText(textRef.current);
+      console.log("obj:", obj);
+    }
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+ <CodeEditor
+      value={code}
+      ref={textRef}
+      language="js"
+      placeholder="Please enter JS code."
+      onChange={(evn) => setCode(evn.target.value)}
+      padding={15}
+      style={{
+        backgroundColor: "#f5f5f5",
+        fontFamily:
+          "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+        fontSize: 12
+      }}
+    />
     </div>
   );
 }
