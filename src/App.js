@@ -1,21 +1,27 @@
 import React, { useEffect } from "react";
-import ReactDOM from "react-dom";
 import CodeEditor, { SelectionText } from "@uiw/react-textarea-code-editor";
 
 
 function App() {
   const textRef = React.useRef();
   const [code, setCode] = React.useState(
-    `function add(a, b) {\n  return a + b;\n}`
+    ``
   );
   useEffect(() => {
     if (textRef.current) {
       const obj = new SelectionText(textRef.current);
       console.log("obj:", obj);
+      var tarea = document.querySelector(".w-tc-editor-text");
+      // tarea.select();
+      var langJS = document.querySelector(".language-js");
+      langJS.addEventListener("click",()=>{
+        tarea.select();
+      });
+      // document.addEventListener();
     }
   }, []);
   return (
-    <div className="App">
+  
  <CodeEditor
       value={code}
       ref={textRef}
@@ -24,13 +30,13 @@ function App() {
       onChange={(evn) => setCode(evn.target.value)}
       padding={15}
       style={{
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "lightgrey",
         fontFamily:
           "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
-        fontSize: 12
+        fontSize: 12,
+        borderRadius: "10px"
       }}
     />
-    </div>
   );
 }
 
